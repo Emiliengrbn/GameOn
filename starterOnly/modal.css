@@ -196,6 +196,7 @@ main {
   position: relative;
   color: #fff;
   padding-top: 10px;
+  min-height: 830px;
 }
 
 .modal-body {
@@ -339,6 +340,7 @@ input[data-error]::after {
   opacity: 1;
   cursor: pointer;
   transform: scale(0.7);
+  z-index: 1000;
 }
 
 .close:before,
@@ -588,4 +590,45 @@ footer {
   to {
     opacity: 1;
   }
+}
+
+.confirmation_content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.text_confirmation_content {
+  color: #fff;
+  font-size: 40px;
+  text-align: center;
+}
+
+.btn-close {
+  background: #fe142f;
+  display: block;
+  margin: 0 auto;
+  border-radius: 7px;
+  font-size: 2rem;
+  padding: 12px 82px;
+  color: #fff;
+  cursor: pointer;
+  border: 0;
+  margin-top: 50px;
+}
+
+.confirmation_content .close {
+  position: initial;
+  width: initial;
+  height: initial;
+}
+
+.confirmation_content .close:before,
+.confirmation_content .close:after {
+  display: none;
 }

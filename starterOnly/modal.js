@@ -15,12 +15,17 @@ const closeBtn = document.querySelectorAll(".close");
 let firstName = document.getElementById("first");
 let lastName = document.getElementById("last");
 let email = document.getElementById("email");
+let birthdate = document.getElementById("birthdate");
 let quantity = document.getElementById("quantity");
+// let radioLocation = document.querySelectorAll("input[name='location']:checked");
+let condition = document.getElementById("checkbox1");
 let firstNameError = document.getElementById("firstNameErrorMsg");
 let lastNameError = document.getElementById("lastNameErrorMsg");
 let emailError = document.getElementById("emailErrorMsg");
+let birthdateError = document.getElementById("birthdateErrorMsg");
 let quantityError = document.getElementById("quantityErrorMsg");
-// const locationValue = document.getElementById("email").value;
+// let locationError = document.getElementById("locationErrorMsg");
+let conditionError = document.getElementById("conditionErrorMsg");
 const errors = {};
 const regexMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 const regexPhone = /^[0-9 +]+$/;
@@ -34,14 +39,14 @@ function launchModal() {
 }
 
 // close modal event
-closeBtn.forEach((span) => span.addEventListener("click", quitModal));
+closeBtn.forEach((close) => close.addEventListener("click", quitModal));
 
 // close modal form
 function quitModal() {
   modalbg.style.display = "none";
 }
 
-//verification of the form
+// Verification of the form
 
 let regexOnlyLetter =
   /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
@@ -52,8 +57,11 @@ let firstNameCheck = false;
 let lastNameCheck = false;
 let emailCheck = false;
 let quantityCheck = false;
-let cityCheck = false;
+let locationCheck = false;
+let conditionCheck = true;
+let birthdateCheck = false;
 
+// Test first name
 firstName.addEventListener("change", () => {
   if (
     regexOnlyLetter.test(firstName.value) === false ||
@@ -67,6 +75,7 @@ firstName.addEventListener("change", () => {
   }
 });
 
+// Test last name
 lastName.addEventListener("change", () => {
   if (
     regexOnlyLetter.test(lastName.value) === false ||
@@ -80,6 +89,7 @@ lastName.addEventListener("change", () => {
   }
 });
 
+// Test email
 email.addEventListener("change", () => {
   if (regexEmail.test(email.value) === false) {
     emailError.innerHTML = "Veuillez renseigner un email valide";
@@ -90,6 +100,7 @@ email.addEventListener("change", () => {
   }
 });
 
+// Test quantity
 quantity.addEventListener("change", () => {
   if (regexQuantity.test(quantity.value) === false) {
     quantityError.innerHTML = "Veuillez renseigner un nombre";
@@ -97,5 +108,47 @@ quantity.addEventListener("change", () => {
   } else {
     quantityError.innerHTML = "";
     quantityCheck = true;
+  }
+});
+
+// Test condition
+condition.addEventListener("change", () => {
+  if (!condition.checked) {
+    conditionError.innerHTML =
+      "Veuillez lire et accepter les condition d'utilisation";
+    conditionCheck = false;
+  } else {
+    conditionError.innerHTML = "";
+    conditionCheck = true;
+  }
+});
+
+// Verify all form
+let submitButton = document.getElementsByClassName("btn-submit");
+let form = document.querySelector("form");
+let confirmation = document.getElementsByClassName("confirmation_content");
+submitButton[0].addEventListener("click", (e) => {
+  e.preventDefault();
+  if (!birthdate.value) {
+    birthdateError.innerHTML = "Veuillez renseigner votre date de naissance";
+    birthdateCheck = false;
+    // return false;
+  } else {
+    birthdateError.innerHTML = "";
+    birthdateCheck = true;
+  }
+  if (
+    firstNameCheck &&
+    lastNameCheck &&
+    emailCheck &&
+    quantityCheck &&
+    conditionCheck &&
+    birthdateCheck
+  ) {
+    form.style.display = "none";
+    confirmation[0].style.display = "flex";
+    console.log("ca marche");
+  } else {
+    alert("merci de remplir tout les champs du formulaire");
   }
 });
