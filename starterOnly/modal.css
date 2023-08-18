@@ -543,7 +543,7 @@ footer {
   .hero-content {
     background: #fff;
     color: #000;
-    padding: 20px;
+    padding: 0px;
   }
 
   .hero-content::after {
@@ -555,13 +555,15 @@ footer {
   }
 
   .hero-headline {
-    font-size: 4.5rem;
+    font-size: 38px;
+    font-weight: bold;
     white-space: normal;
   }
 
   .hero-text {
-    width: unset;
-    font-size: 1.5rem;
+    width: 77%;
+    font-size: 20px;
+    margin-top: 20px;
   }
 
   .hero-img img {
